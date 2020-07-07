@@ -63,6 +63,8 @@
         <module>api</module>
         <module>processor</module>
         <module>route</module>
+        <module>mock</module>
+        <module>feature</module>
         <module>runtime</module>
     </modules>
 
