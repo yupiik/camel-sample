@@ -13,22 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.yupiik.camel.example.route.logging;
+package io.yupiik.camel.sample.fintech.mock.bankbng;
 
-import org.apache.camel.builder.RouteBuilder;
 import org.osgi.service.component.annotations.Component;
 
-@Component(
-        name = "io.yupiik.camel.example.gateway.route.logging",
-        immediate = true,
-        service = { RouteBuilder.class }
-)
-public class LoggingRouteBuilder extends RouteBuilder {
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 
-    @Override
-    public void configure() throws Exception {
-        from("direct-vm:logging").routeId("logging")
-                .log("This is a test");
+@Path("/resta")
+@Component(property = { "osgi.jaxrs.resource=true" })
+public class RestA {
+
+    @Path("/")
+    @Produces("application/json")
+    @GET
+    public String get() {
+        return "hello world";
     }
 
 }
