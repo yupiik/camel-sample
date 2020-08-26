@@ -13,19 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.yupiik.camel.sample.fintech.platform.entrypoint;
+package io.yupiik.camel.sample.fintech.platform.entrypoint.route;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
+import org.apache.camel.Exchange;
+import org.apache.camel.Processor;
+import org.osgi.service.component.annotations.Component;
 
-@Path("/")
-public class SimpleApi {
+@Component(
+        name = "io.yupiik.camel.sample.fintech.platform.entrypoint.passthrough",
+        immediate = true,
+        service = { Processor.class },
+        property = "name=passthrough"
+)
+public class Passthrough implements Processor {
 
-    @Path("/foo")
-    @GET
-    public String foo() {
-        // stub
-        return null;
+    @Override
+    public void process(Exchange exchange) {
+
     }
 
 }

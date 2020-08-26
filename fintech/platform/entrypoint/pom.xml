@@ -62,7 +62,7 @@
                             *
                         </Import-Package>
                         <Private-Package>
-                            io.yupiik.camel.sample.fintech.platform.entrypoint
+                            io.yupiik.camel.sample.fintech.platform.entrypoint.route
                         </Private-Package>
                     </instructions>
                 </configuration>
