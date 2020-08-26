@@ -1,3 +1,5 @@
+![Java CI with Maven](https://github.com/yupiik/camel-sample/workflows/Java%20CI%20with%20Maven/badge.svg)
+
 # Apache Camel Sample
 
 The purpose of this project is to show how to use Apache Camel (with Apache Karaf) to build kind of business 
