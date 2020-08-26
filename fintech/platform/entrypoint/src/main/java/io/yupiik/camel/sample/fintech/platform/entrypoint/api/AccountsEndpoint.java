@@ -20,7 +20,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
 @Path("/accounts")
-public class Accounts {
+public class AccountsEndpoint {
 
     @GET
     public String getAllAccounts() {

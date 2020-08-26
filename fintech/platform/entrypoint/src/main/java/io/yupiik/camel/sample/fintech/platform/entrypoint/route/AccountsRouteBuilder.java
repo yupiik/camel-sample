@@ -13,22 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.yupiik.camel.sample.fintech.platform.connectors;
+package io.yupiik.camel.sample.fintech.platform.entrypoint.route;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.osgi.service.component.annotations.Component;
 
 @Component(
-        name = "io.yupiik.camel.sample.fintech.platform.connectors.logging",
+        name = "io.yupiik.camel.sample.fintech.platform.entrypoint.accounts.route",
         immediate = true,
-        service = { RouteBuilder.class }
+        service = { RouteBuilder.class },
+        property = "name=accounts"
 )
-public class LoggingRouteBuilder extends RouteBuilder {
+public class AccountsRouteBuilder extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from("direct-vm:logging").routeId("logging")
-                .log("This is a test");
+        //TODO implement
+        from("cxfrs:bean");
     }
 
 }

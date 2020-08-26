@@ -20,16 +20,16 @@ import org.apache.camel.Processor;
 import org.osgi.service.component.annotations.Component;
 
 @Component(
-        name = "io.yupiik.camel.sample.fintech.platform.entrypoint.passthrough",
+        name = "io.yupiik.camel.sample.fintech.platform.entrypoint.accounts.processor",
         immediate = true,
         service = { Processor.class },
-        property = "name=passthrough"
+        property = "name=accounts"
 )
-public class Passthrough implements Processor {
+public class AccountsProcessor implements Processor {
 
     @Override
     public void process(Exchange exchange) {
-
+        //TODO implement
     }
 
 }
