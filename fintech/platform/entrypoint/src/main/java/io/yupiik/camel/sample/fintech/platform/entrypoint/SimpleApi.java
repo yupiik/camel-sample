@@ -13,22 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.yupiik.camel.example.route.logging;
+package io.yupiik.camel.sample.fintech.platform.entrypoint;
 
-import org.apache.camel.builder.RouteBuilder;
-import org.osgi.service.component.annotations.Component;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
 
-@Component(
-        name = "io.yupiik.camel.example.gateway.route.logging",
-        immediate = true,
-        service = { RouteBuilder.class }
-)
-public class LoggingRouteBuilder extends RouteBuilder {
+@Path("/")
+public class SimpleApi {
 
-    @Override
-    public void configure() throws Exception {
-        from("direct-vm:logging").routeId("logging")
-                .log("This is a test");
+    @Path("/foo")
+    @GET
+    public String foo() {
+        // stub
+        return null;
     }
 
 }

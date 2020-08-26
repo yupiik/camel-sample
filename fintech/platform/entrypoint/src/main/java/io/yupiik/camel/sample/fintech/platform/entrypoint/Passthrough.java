@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.yupiik.camel.example.gateway.processor.passthrough;
+package io.yupiik.camel.sample.fintech.platform.entrypoint;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.osgi.service.component.annotations.Component;
 
 @Component(
-        name = "io.yupiik.camel.example.gateway.processor.passthrough",
+        name = "io.yupiik.camel.sample.fintech.platform.entrypoint.passthrough",
         immediate = true,
         service = { Processor.class },
         property = "name=passthrough"

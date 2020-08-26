@@ -54,7 +54,7 @@
                             *
                         </Import-Package>
                         <Private-Package>
-                            io.yupiik.camel.example.api.mock
+                            io.yupiik.camel.sample.fintech.mock.bankbng
                         </Private-Package>
                     </instructions>
                 </configuration>

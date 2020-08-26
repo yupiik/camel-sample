@@ -54,9 +54,6 @@
     </repositories>
 
     <modules>
-        <module>api</module>
-        <module>processor</module>
-        <module>route</module>
         <module>fintech</module>
     </modules>
 

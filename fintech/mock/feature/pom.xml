@@ -26,6 +26,7 @@
     </parent>
 
     <artifactId>fintech-mock-feature</artifactId>
+    <name>Camel Sample :: Fintech :: Mock :: Feature</name>
     <packaging>pom</packaging>
 
     <build>
