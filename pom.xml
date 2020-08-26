@@ -3,14 +3,29 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.yupiik.camel.example</groupId>
-    <artifactId>api-gateway</artifactId>
+    <groupId>io.yupiik.camel.sample</groupId>
+    <artifactId>parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
         <camel.version>3.5.0-SNAPSHOT</camel.version>
+        <osgi.version>6.0.0</osgi.version>
     </properties>
+
+    <modules>
+        <module>api</module>
+        <module>processor</module>
+        <module>route</module>
+        <module>mock</module>
+        <module>feature</module>
+    </modules>
+
+    <organization>
+        <name>Yupiik SAS</name>
+        <url>https://www.yupiik.com</url>
+    </organization>
+    <inceptionYear>2020</inceptionYear>
 
     <dependencyManagement>
         <dependencies>
@@ -27,12 +42,12 @@
             <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>osgi.core</artifactId>
-                <version>6.0.0</version>
+                <version>${osgi.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>osgi.cmpn</artifactId>
-                <version>6.0.0</version>
+                <version>${osgi.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -43,7 +58,7 @@
                 <plugin>
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-bundle-plugin</artifactId>
-                    <version>4.2.1</version>
+                    <version>5.1.1</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -56,16 +71,69 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>3.0</version>
+                <executions>
+                    <execution>
+                        <id>check-license</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <inherited>false</inherited>
+                <configuration>
+                    <aggregate>true</aggregate>
+                    <header>${maven.multiModuleProjectDirectory}/src/license/header.txt</header>
+                    <headerDefinitions>
+                        <headerDefinition>${maven.multiModuleProjectDirectory}/src/license/header_format.xml</headerDefinition>
+                    </headerDefinitions>
+                    <properties>
+                        <organization.name>Yupiik SAS</organization.name>
+                        <organization.url>https://www.yupiik.com</organization.url>
+                        <year>2020</year>
+                    </properties>
+                    <mapping>
+                        <adoc>DOUBLESLASH_STYLE</adoc>
+                        <scss>JAVADOC_STYLE</scss>
+                        <feature>SCRIPT_STYLE</feature>
+                    </mapping>
+                    <includes> <!-- default goes into all folder and is insanely slow -->
+                        <include>**/src/**</include>
+                        <include>**/etc/**</include>
+                        <include>**/bin/**</include>
+                        <include>**/cypress/plugins/**</include>
+                        <include>**/cypress/integration/**</include>
+                    </includes>
+                    <excludes>
+                        <exclude>images/bin/*</exclude>
+                        <exclude>**/*.txt</exclude>
+                        <exclude>**/.factorypath</exclude>
+                        <exclude>**/*.idea</exclude>
+                        <exclude>LICENSE</exclude>
+                        <exclude>**/node_modules/**</exclude>
+                        <exclude>**/target/**</exclude>
+                        <exclude>**/dist/**</exclude>
+                        <exclude>**/.node/**</exclude>
+                        <exclude>**/src/license/**</exclude>
+                        <exclude>**/generated/**</exclude>
+                        <exclude>**/*.gitkeep</exclude>
+                        <exclude>**/browserslist</exclude>
+                        <exclude>**/*.ldif</exclude>
+                        <exclude>**/*.mp4</exclude>
+                        <exclude>**/logstash.conf</exclude>
+                        <exclude>Jenkinsfile*</exclude>
+                        <exclude>**/*.env</exclude>
+                        <exclude>**/.mkdir</exclude>
+                        <exclude>**/derby.log</exclude>
+                        <exclude>**/*.xslx</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-
-    <modules>
-        <module>api</module>
-        <module>processor</module>
-        <module>route</module>
-        <module>mock</module>
-        <module>feature</module>
-        <module>runtime</module>
-    </modules>
 
 </project>
