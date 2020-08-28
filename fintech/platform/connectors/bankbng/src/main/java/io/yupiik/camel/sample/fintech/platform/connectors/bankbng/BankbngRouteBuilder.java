@@ -28,7 +28,7 @@ public class BankbngRouteBuilder extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         //TODO implement
-        from("direct-vm://bankbng");
+        from("direct-vm://bankbng").log("from connector bankBNG");
     }
 
 }

@@ -28,8 +28,9 @@ public class AccountsRouteBuilder extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        //TODO implement
-        from("cxfrs:bean");
+        from("cxfrs:bean:cxfEndpoint?resourceClasses=io.yupiik.camel.sample.fintech.platform.entrypoint.api.AccountsEndpoint")
+                .log("from entrypoint")
+                .to("direct-vm://bankbng");
     }
 
 }

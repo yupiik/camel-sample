@@ -36,6 +36,13 @@
 
         <camel.version>3.5.0-SNAPSHOT</camel.version>
         <osgi.version>6.0.0</osgi.version>
+        <karaf.version>4.2.9</karaf.version>
+        <cxf.version>3.3.6</cxf.version>
+        <slf4j.version>1.7.30</slf4j.version>
+
+        <jackson.version>2.10.0</jackson.version>
+        <javax.activation>1.2.0</javax.activation>
+        <geronimo.jsonspec.version>1.2</geronimo.jsonspec.version>
     </properties>
 
     <repositories>

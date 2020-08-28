@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (C) 2020 - Yupiik SAS - https://www.yupiik.com
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<features name="fintech-platform-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.6.0"
+		  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		  xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.6.0">
+
+    <feature name="fintech-platform" version="${project.version}" description="Fintech platform main feature">
+        <feature version="${project.version}">fintech-platform-common</feature>
+        <feature version="${project.version}">fintech-platform-connector-bankbng</feature>
+        <feature version="${project.version}">fintech-platform-entrypoint</feature>
+    </feature>
+
+	<feature name="fintech-platform-common" version="${project.version}" description="Fintech platform microservices AISP">
+        <bundle dependency="true">mvn:javax.activation/javax.activation-api/${javax.activation}</bundle>
+        <bundle dependency="true">mvn:com.sun.activation/javax.activation/${javax.activation}</bundle>
+        <bundle dependency="true">mvn:org.apache.geronimo.specs/geronimo-json_1.1_spec/${geronimo.jsonspec.version}</bundle>
+
+        <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-core/${jackson.version}</bundle>
+        <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-databind/${jackson.version}</bundle>
+        <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-annotations/${jackson.version}</bundle>
+        <bundle dependency="true">mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-base/${jackson.version}</bundle>
+        <bundle dependency="true">mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-json-provider/${jackson.version}</bundle>
+	</feature>
+
+    <feature name="fintech-platform-entrypoint" version="${project.version}" description="Fintech platform entrypoint">
+        <bundle>mvn:io.yupiik.camel.sample/fintech-platform-entrypoint/${project.version}</bundle>
+    </feature>
+
+    <feature name="fintech-platform-connector-bankbng" version="${project.version}" description="Fintech platform connector for Bank BNG">
+        <bundle>mvn:io.yupiik.camel.sample/fintech-platform-connector-bankbng/${project.version}</bundle>
+    </feature>
+
+</features>

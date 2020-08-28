@@ -27,7 +27,7 @@
 
     <artifactId>fintech-platform-entrypoint</artifactId>
     <name>Camel Sample :: Fintech :: Platform :: Entrypoint</name>
-    <packaging>pom</packaging>
+    <packaging>bundle</packaging>
 
     <dependencies>
         <dependency>

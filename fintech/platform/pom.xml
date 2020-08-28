@@ -31,8 +31,9 @@
 
     <modules>
         <module>connectors</module>
-        <module>distribution</module>
         <module>entrypoint</module>
+        <module>feature</module>
+        <module>distribution</module>
     </modules>
 
 </project>
