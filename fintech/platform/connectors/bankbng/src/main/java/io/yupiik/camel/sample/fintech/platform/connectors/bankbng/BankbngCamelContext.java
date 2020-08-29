@@ -53,7 +53,7 @@ public class BankbngCamelContext {
         RouteDefinition route = new RouteDefinition();
         route.routeId(routeId);
         route.from("direct-vm:bankbng")
-                .log("from connector bankBNG");
+                .log("message received from connector bankBNG");
         return route;
     }
 

@@ -128,6 +128,7 @@
                         <feature>scr</feature>
                         <feature>camel-</feature>
                         <feature>camel-cxf</feature>
+                        <feature>camel-jackson</feature>
                         <feature>fintech-platform</feature>
                     </bootFeatures>
                     <installedFeatures>

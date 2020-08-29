@@ -15,6 +15,7 @@
  */
 package io.yupiik.camel.sample.fintech.platform.entrypoint.route;
 
+import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import org.apache.camel.CamelContext;
 import org.apache.camel.core.osgi.OsgiDefaultCamelContext;
 import org.apache.camel.model.RouteDefinition;
@@ -38,6 +39,7 @@ public class AccountsCamelContext {
         camelContext = new OsgiDefaultCamelContext(context.getBundleContext());
         camelContext.setName("fintech-accounts");
         camelContext.start();
+        camelContext.getRegistry().bind("jackson", new JacksonJsonProvider());
         camelContext.addRouteDefinition(buildRoute("account-main-route"));
         serviceRegistration = context.getBundleContext().registerService(CamelContext.class, camelContext, null);
     }
@@ -52,9 +54,12 @@ public class AccountsCamelContext {
     private RouteDefinition buildRoute(String routeId) {
         RouteDefinition route = new RouteDefinition();
         route.routeId(routeId);
-        route.from("cxfrs://http://0.0.0.0:8282/rest?resourceClasses=io.yupiik.camel.sample.fintech.platform.entrypoint.api.AccountsEndpoint")
-                    .log("from entrypoint")
-                    .to("direct-vm:bankbng");
+        route.from("cxfrs://http://0.0.0.0:8282/fintech?resourceClasses=io.yupiik.camel.sample.fintech.platform.entrypoint.api.AccountsEndpoint&providers=jackson")
+                    .log("${exchange.properties}")
+                    .setHeader("connector")
+                        .exchangeProperty("bank")
+                    .routingSlip()
+                        .header("connector");
         return route;
     }
 }

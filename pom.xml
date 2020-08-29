@@ -39,6 +39,7 @@
         <karaf.version>4.2.9</karaf.version>
         <cxf.version>3.3.6</cxf.version>
         <slf4j.version>1.7.30</slf4j.version>
+        <junit.version>5.6.2</junit.version>
 
         <jackson.version>2.10.0</jackson.version>
         <javax.activation>1.2.0</javax.activation>
@@ -93,6 +94,21 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
     <build>
         <pluginManagement>
