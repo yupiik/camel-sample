@@ -31,8 +31,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-core</artifactId>
+            <groupId>org.apache.camel.karaf</groupId>
+            <artifactId>camel-core-osgi</artifactId>
         </dependency>
         <dependency>
             <groupId>org.osgi</groupId>
@@ -63,7 +63,8 @@
                             *
                         </Import-Package>
                         <Private-Package>
-                            io.yupiik.camel.sample.fintech.platform.entrypoint.route
+                            io.yupiik.camel.sample.fintech.platform.entrypoint.route,
+                            io.yupiik.camel.sample.fintech.platform.entrypoint.api
                         </Private-Package>
                     </instructions>
                 </configuration>

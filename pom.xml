@@ -77,6 +77,11 @@
                 <version>${camel.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.apache.camel.karaf</groupId>
+                <artifactId>camel-core-osgi</artifactId>
+                <version>${camel.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>osgi.core</artifactId>
                 <version>${osgi.version}</version>

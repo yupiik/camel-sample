@@ -126,8 +126,7 @@
                         <feature>deployer</feature>
                         <feature>diagnostic</feature>
                         <feature>scr</feature>
-                        <feature>http</feature>
-                        <feature>http-felix</feature>
+                        <feature>camel-</feature>
                         <feature>camel-cxf</feature>
                         <feature>fintech-platform</feature>
                     </bootFeatures>

@@ -25,6 +25,7 @@
     </feature>
 
 	<feature name="fintech-platform-common" version="${project.version}" description="Fintech platform microservices AISP">
+        <bundle>mvn:org.apache.camel.karaf/camel-osgi-activator/${camel.version}</bundle>
         <bundle dependency="true">mvn:javax.activation/javax.activation-api/${javax.activation}</bundle>
         <bundle dependency="true">mvn:com.sun.activation/javax.activation/${javax.activation}</bundle>
         <bundle dependency="true">mvn:org.apache.geronimo.specs/geronimo-json_1.1_spec/${geronimo.jsonspec.version}</bundle>

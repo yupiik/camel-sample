@@ -50,8 +50,8 @@ public class AccountsEndpoint {
     }
 
     @GET
-    @Path("/{account-id}/transactions/{transatcion-id}")
-    public String getAccountTransaction(@PathParam("account-id") String accountId, @PathParam("transatcion-id") String transactionId) {
+    @Path("/{account-id}/transactions/{transaction-id}")
+    public String getAccountTransaction(@PathParam("account-id") String accountId, @PathParam("transaction-id") String transactionId) {
         // stub
         return null;
     }
