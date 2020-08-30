@@ -13,21 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.yupiik.camel.sample.fintech.platform.entrypoint.route;
+package io.yupiik.camel.sample.fintech.platform.connectors.bankbng;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AccountsProcessor implements Processor {
+public class BankbngProcessor implements Processor {
 
-    private static Logger logger = LoggerFactory.getLogger(AccountsProcessor.class);
+    private static Logger logger = LoggerFactory.getLogger(BankbngProcessor.class);
 
     @Override
     public void process(Exchange exchange) {
-        String bank = exchange.getMessage().getHeaders().get("X-Fintech-Bank").toString();
-        exchange.getMessage().setHeader("X-Fintech-Route-Redirect", "direct-vm:" + bank);
+        logger.info( exchange.getMessage().getHeaders().get("X-Fintech-Route-Redirect").toString());
     }
 
 }
