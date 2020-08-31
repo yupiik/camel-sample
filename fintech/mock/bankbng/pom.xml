@@ -26,37 +26,51 @@
 
     <artifactId>fintech-mock-bankbng</artifactId>
     <name>Camel Sample :: Fintech :: Mock :: Bank BNG</name>
-    <packaging>bundle</packaging>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>osgi.cmpn</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>javax.ws.rs-api</artifactId>
-            <version>2.1</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <extensions>true</extensions>
-                <inherited>true</inherited>
+                <groupId>org.apache.meecrowave</groupId>
+                <artifactId>meecrowave-maven-plugin</artifactId>
+                <version>${meecrowave.version}</version>
                 <configuration>
-                    <instructions>
-                        <Import-Package>
-                            *
-                        </Import-Package>
-                        <Private-Package>
-                            io.yupiik.camel.sample.fintech.mock.bankbng
-                        </Private-Package>
-                    </instructions>
+                    <buildDirectory>${project.build.directory}/assembly</buildDirectory>
+                    <keepExplodedFolder>true</keepExplodedFolder>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>2.2.0</version>
+                <configuration>
+                    <allowInsecureRegistries>true</allowInsecureRegistries>
+                    <from>
+                        <image>adoptopenjdk/openjdk11:alpine-jre</image>
+                    </from>
+                    <to>
+                        <image>io.yupiik.camel.sample/fintech-mock-bankbng:${project.version}</image>
+                    </to>
+                    <container>
+                        <entrypoint>
+                            <entrypoint>/fintech-mock-bankbng-distribution/bin/meecrowave.sh</entrypoint>
+                            <entrypoint>run</entrypoint>
+                        </entrypoint>
+                        <workingDirectory>/fintech-mock-bankbng-distribution</workingDirectory>
+                        <ports>
+                            <port>8080</port>
+                        </ports>
+                    </container>
+                    <extraDirectories>
+                        <paths>
+                            <path>target/assembly</path>
+                        </paths>
+                        <permissions>
+                            <permission>
+                                <file>/fintech-mock-bankbng-distribution/bin/meecrowave.sh</file>
+                                <mode>755</mode>
+                            </permission>
+                        </permissions>
+                    </extraDirectories>
                 </configuration>
             </plugin>
         </plugins>
