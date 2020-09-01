@@ -24,6 +24,8 @@ import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
 
+import static org.apache.camel.builder.Builder.constant;
+
 @Component(
         name = "io.yupiik.camel.sample.fintech.platform.connectors.bankbng",
         immediate = true
@@ -38,6 +40,7 @@ public class BankbngCamelContext {
         camelContext = new OsgiDefaultCamelContext(context.getBundleContext());
         camelContext.setName("fintech-connector-bankbng");
         camelContext.start();
+//        camelContext.getRegistry().bind("processor.bankbng", new BankbngProcessor());
         camelContext.addRouteDefinition(buildRoute("bankbng-main-route"));
         serviceRegistration = context.getBundleContext().registerService(CamelContext.class, camelContext, null);
     }
@@ -54,8 +57,11 @@ public class BankbngCamelContext {
         route.routeId(routeId);
         route.from("direct-vm:bankbng")
                 .log("message received from connector bankBNG")
-                .bean(BankbngProcessor.class)
-                .to("cxfrs://http://localhost:8080/fintech/mock/bankbng/accounts");
+                .removeHeaders("*")
+                .setHeader("Accept", constant("application/xml"))
+                .setHeader("CamelHttpMethod", constant("GET"))
+                .to("cxfrs://http://localhost:8080/fintech/mock/bankbng/accounts")
+                .bean(BankbngProcessor.class);
         return route;
     }
 

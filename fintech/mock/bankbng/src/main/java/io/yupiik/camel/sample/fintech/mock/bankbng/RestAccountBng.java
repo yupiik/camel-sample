@@ -38,18 +38,16 @@ public class RestAccountBng {
         }
 
         return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-                "<accounts>\n" +
-                "   <account>\n" +
-                "       <acId>"+ UUID.randomUUID().toString() +"</acId>\n" +
-                "       <acIban>FR" + sb + "</acIban>\n" +
-                "       <acLabel>Main Account</acLabel>\n" +
-                "       <acOwnerFirstname>Heike</acOwnerFirstname>\n" +
-                "       <acOwnerLastname>Mustermann</acOwnerLastname>\n" +
-                "       <acType>CACC</acType>\n" +
-                "       <acCurrency>EUR</acCurrency>\n" +
-                "       <acPackage>Girokonto</acPackage>\n" +
-                "   </account>\n" +
-                "</accounts>\n";
+                "<account>\n" +
+                "    <acId>"+ UUID.randomUUID().toString() +"</acId>\n" +
+                "    <acIban>FR" + sb + "</acIban>\n" +
+                "    <acLabel>Main Account</acLabel>\n" +
+                "    <acOwnerFirstname>Heike</acOwnerFirstname>\n" +
+                "    <acOwnerLastname>Mustermann</acOwnerLastname>\n" +
+                "    <acType>CACC</acType>\n" +
+                "    <acCurrency>EUR</acCurrency>\n" +
+                "    <acPackage>Girokonto</acPackage>\n" +
+                "</account>\n";
     }
 
 }

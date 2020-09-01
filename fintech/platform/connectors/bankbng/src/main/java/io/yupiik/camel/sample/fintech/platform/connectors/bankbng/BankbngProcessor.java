@@ -20,13 +20,25 @@ import org.apache.camel.Processor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.ws.rs.core.Response;
+
 public class BankbngProcessor implements Processor {
 
     private static Logger logger = LoggerFactory.getLogger(BankbngProcessor.class);
 
     @Override
     public void process(Exchange exchange) {
-        logger.info( exchange.getMessage().getHeaders().get("X-Fintech-Route-Redirect").toString());
+        exchange.getMessage().setHeader("X-Fintech-Transform", "NextGenPSD2");
+        Response response = exchange.getMessage().getBody(Response.class);//.replaceAll("</.*>", "!")
+        String transformBody = response.readEntity(String.class)
+                .replaceAll("\\<\\?xml version=\"1.0\" encoding=\"UTF-8\"\\?\\>\\n", "")
+                .replaceAll("\\<account\\>", "{")
+                .replaceAll("\\<\\/account\\>\\n", "}")
+                .replaceAll("\\<\\/.*\\>", "\",")
+                .replaceAll("\\<", "\"")
+                .replaceAll("\\>", "\": \"")
+                .replaceAll("\\,\\n}", "\n}");
+        exchange.getMessage().setBody(transformBody);
     }
 
 }

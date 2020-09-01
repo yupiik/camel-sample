@@ -41,7 +41,7 @@ public class AccountBngTest {
                     .request(MediaType.APPLICATION_XML_TYPE)
                     .get(String.class);
             Assert.assertNotNull(accounts);
-            Assert.assertTrue(accounts.contains("<accounts>"));
+            Assert.assertTrue(accounts.contains("<account>"));
 
         } finally {
             client.close();

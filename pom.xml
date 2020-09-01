@@ -43,6 +43,7 @@
 
         <jackson.version>2.10.0</jackson.version>
         <javax.activation>1.2.0</javax.activation>
+        <jakarta.jaxrs.version>2.1.6</jakarta.jaxrs.version>
         <geronimo.jsonspec.version>1.2</geronimo.jsonspec.version>
     </properties>
 
