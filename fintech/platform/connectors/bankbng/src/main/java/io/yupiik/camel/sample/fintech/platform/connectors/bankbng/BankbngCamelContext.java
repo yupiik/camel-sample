@@ -54,7 +54,8 @@ public class BankbngCamelContext {
         route.routeId(routeId);
         route.from("direct-vm:bankbng")
                 .log("message received from connector bankBNG")
-                .bean(BankbngProcessor.class);
+                .bean(BankbngProcessor.class)
+                .to("cxfrs://http://localhost:8080/fintech/mock/bankbng/accounts");
         return route;
     }
 
