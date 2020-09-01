@@ -40,7 +40,6 @@ public class BankbngCamelContext {
         camelContext = new OsgiDefaultCamelContext(context.getBundleContext());
         camelContext.setName("fintech-connector-bankbng");
         camelContext.start();
-//        camelContext.getRegistry().bind("processor.bankbng", new BankbngProcessor());
         camelContext.addRouteDefinition(buildRoute("bankbng-main-route"));
         serviceRegistration = context.getBundleContext().registerService(CamelContext.class, camelContext, null);
     }
