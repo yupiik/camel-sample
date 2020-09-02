@@ -15,43 +15,43 @@
  */
 package io.yupiik.camel.sample.fintech.platform.connectors.bankbng;
 
-import org.apache.camel.RoutesBuilder;
-import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.test.junit5.CamelTestSupport;
-import org.junit.jupiter.api.BeforeEach;
+import org.apache.camel.Exchange;
+import org.apache.camel.impl.DefaultCamelContext;
+import org.apache.camel.support.DefaultExchange;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class BankbngProcessorTest extends CamelTestSupport {
+import javax.ws.rs.core.*;
 
-    @Override
-    @BeforeEach
-    public void setUp() throws Exception {
-        //replaceRouteFromWith("routeId", "direct:start");
-        super.setUp();
+public class BankbngProcessorTest {
+
+    @Test
+    public void testSimpleBody() {
+        BankbngProcessor processor = new BankbngProcessor();
+
+        DefaultCamelContext camelContext = new DefaultCamelContext();
+        Exchange exchange = new DefaultExchange(camelContext);
+        Response response = new ResponseMock("foo");
+        exchange.getMessage().setBody(response, Response.class);
+        processor.process(exchange);
+
+        Assertions.assertEquals("NextGenPSD2", exchange.getMessage().getHeader("X-Fintech-Transform"));
+        Assertions.assertEquals("foo", exchange.getMessage().getBody());
     }
 
     @Test
-    public void testProcessor() throws InterruptedException {
-//        try {
-            template.sendBody("direct:bankbng", "Hello World");
-//            fail("Should have thrown exception");
-//        } catch (CamelExecutionException e) {
-//            assertEquals("Forced", e.getCause().getMessage());
-//        }
+    public void testTransformedBody() {
+        BankbngProcessor processor = new BankbngProcessor();
 
-        assertMockEndpointsSatisfied();
+        DefaultCamelContext camelContext = new DefaultCamelContext();
+        Exchange exchange = new DefaultExchange(camelContext);
+        Response response = new ResponseMock("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                "<account><foo>bar</foo></account>\n");
+        exchange.getMessage().setBody(response, Response.class);
+        processor.process(exchange);
+
+        Assertions.assertEquals("NextGenPSD2", exchange.getMessage().getHeader("X-Fintech-Transform"));
+        Assertions.assertEquals("{\"foo\": \"bar\",}", exchange.getMessage().getBody());
     }
 
-
-    @Override
-    protected RoutesBuilder createRouteBuilder() throws Exception {
-        return new RouteBuilder() {
-            @Override
-            public void configure() throws Exception {
-                // try to redeliver up till 3 times
-                errorHandler(defaultErrorHandler().maximumRedeliveries(3).redeliveryDelay(0));
-                from("direct:bankbng").log("${body}");
-            }
-        };
-    }
 }

@@ -40,7 +40,7 @@ public class BankbngCamelContext {
         camelContext = new OsgiDefaultCamelContext(context.getBundleContext());
         camelContext.setName("fintech-connector-bankbng");
         camelContext.start();
-        camelContext.addRouteDefinition(buildRoute("bankbng-main-route"));
+        camelContext.addRoutes(new BankbngRoute());
         serviceRegistration = context.getBundleContext().registerService(CamelContext.class, camelContext, null);
     }
 
@@ -49,19 +49,6 @@ public class BankbngCamelContext {
         serviceRegistration.unregister();
         camelContext.removeRouteDefinitions(camelContext.getRouteDefinitions());
         camelContext.stop();
-    }
-
-    private RouteDefinition buildRoute(String routeId) {
-        RouteDefinition route = new RouteDefinition();
-        route.routeId(routeId);
-        route.from("direct-vm:bankbng")
-                .log("message received from connector bankBNG")
-                .removeHeaders("*")
-                .setHeader("Accept", constant("application/xml"))
-                .setHeader("CamelHttpMethod", constant("GET"))
-                .to("cxfrs://http://localhost:8080/fintech/mock/bankbng/accounts")
-                .bean(BankbngProcessor.class);
-        return route;
     }
 
 }

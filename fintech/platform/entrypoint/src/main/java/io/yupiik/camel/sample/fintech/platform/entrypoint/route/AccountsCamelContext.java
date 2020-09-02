@@ -47,6 +47,7 @@ public class AccountsCamelContext {
     @Deactivate
     public void deactivate() throws Exception {
         serviceRegistration.unregister();
+        camelContext.removeRouteDefinitions(camelContext.getRouteDefinitions());
         camelContext.stop();
     }
 

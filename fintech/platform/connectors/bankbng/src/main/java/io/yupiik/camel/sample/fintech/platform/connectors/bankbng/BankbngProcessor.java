@@ -30,6 +30,7 @@ public class BankbngProcessor implements Processor {
     public void process(Exchange exchange) {
         exchange.getMessage().setHeader("X-Fintech-Transform", "NextGenPSD2");
         Response response = exchange.getMessage().getBody(Response.class);//.replaceAll("</.*>", "!")
+        // TODO make the transform more robust
         String transformBody = response.readEntity(String.class)
                 .replaceAll("\\<\\?xml version=\"1.0\" encoding=\"UTF-8\"\\?\\>\\n", "")
                 .replaceAll("\\<account\\>", "{")
