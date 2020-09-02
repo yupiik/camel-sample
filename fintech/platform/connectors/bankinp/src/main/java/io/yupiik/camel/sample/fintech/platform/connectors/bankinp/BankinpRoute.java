@@ -13,22 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.yupiik.camel.sample.fintech.platform.connectors.bankbng;
+package io.yupiik.camel.sample.fintech.platform.connectors.bankinp;
 
 import org.apache.camel.builder.RouteBuilder;
 
-public class BankbngRoute extends RouteBuilder {
+public class BankinpRoute extends RouteBuilder {
 
     @Override
     public void configure() {
-        from("direct-vm:bankbng")
-                .id("bankbng-connector-route")
-                .log("message received for connector bankBNG")
+        from("direct-vm:bankinp")
+                .id("bankinp-connector-route")
+                .log("message received for connector bankINP")
                 .removeHeaders("*")
-                .setHeader("Accept", constant("application/xml"))
+                .setHeader("Accept", constant("application/json"))
                 .setHeader("CamelHttpMethod", constant("GET"))
-                .to("cxfrs://http://localhost:8080/fintech/mock/bankbng/accounts")
-                .process(new BankbngProcessor());
+                .multicast(new BankinpAggregator()).parallelProcessing().timeout(2000).to("cxfrs://http://localhost:8080/fintech/mock/bankinp/accounts", "cxfrs://http://localhost:8080/fintech/mock/banking/accounts/transactions");
     }
 
 }

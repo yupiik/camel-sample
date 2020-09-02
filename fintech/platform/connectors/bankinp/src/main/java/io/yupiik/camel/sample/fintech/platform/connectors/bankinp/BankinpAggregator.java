@@ -13,22 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.yupiik.camel.sample.fintech.platform.connectors.bankbng;
+package io.yupiik.camel.sample.fintech.platform.connectors.bankinp;
 
-import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.AggregationStrategy;
+import org.apache.camel.Exchange;
 
-public class BankbngRoute extends RouteBuilder {
+// TODO manipulate the concrete exchanges
+public class BankinpAggregator implements AggregationStrategy {
 
     @Override
-    public void configure() {
-        from("direct-vm:bankbng")
-                .id("bankbng-connector-route")
-                .log("message received for connector bankBNG")
-                .removeHeaders("*")
-                .setHeader("Accept", constant("application/xml"))
-                .setHeader("CamelHttpMethod", constant("GET"))
-                .to("cxfrs://http://localhost:8080/fintech/mock/bankbng/accounts")
-                .process(new BankbngProcessor());
+    public Exchange aggregate(Exchange oldExchange, Exchange newExchange) {
+        if (oldExchange == null) {
+            return newExchange;
+        }
+
+        String oldBody = oldExchange.getIn().getBody(String.class);
+        String newBody = newExchange.getIn().getBody(String.class);
+        oldExchange.getIn().setBody(oldBody + "+" + newBody);
+        return oldExchange;
     }
 
 }

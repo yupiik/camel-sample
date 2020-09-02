@@ -27,7 +27,6 @@ import java.util.UUID;
 @Path("/accounts")
 public class RestAccountInp {
 
-
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getAllAccounts() {
@@ -47,6 +46,25 @@ public class RestAccountInp {
                 "       \"cmpType\": \"CACC\",\n" +
                 "       \"cmpCurrency\": \"EUR\",\n" +
                 "       \"cmpPackage\": \"Girokonto\"\n" +
+                "   }\n" +
+                "]";
+    }
+
+    @Path("/transactions")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getAllTransactions() {
+        StringBuffer sb = new StringBuffer();
+        Random random = new Random();
+        for (int cpt = 0; cpt < 25; cpt++) {
+            sb.append(random.ints(0, 9).iterator().nextInt());
+        }
+
+        return "[\n" +
+                "   {\n" +
+                "       \"txId\": \"" + UUID.randomUUID().toString() + "\",\n" +
+                "       \"txIban\": \"FR" + sb + "\",\n" +
+                "       \"txLabel\": \"MARKETTX\",\n" +
                 "   }\n" +
                 "]";
     }
