@@ -40,7 +40,7 @@ public class AccountsCamelContext {
         camelContext.setName("fintech-accounts");
         camelContext.start();
         camelContext.getRegistry().bind("provider.jackson", new JacksonJsonProvider());
-        camelContext.addRouteDefinition(buildRoute("account-main-route"));
+        camelContext.addRoutes(new AccountsRoute());
         serviceRegistration = context.getBundleContext().registerService(CamelContext.class, camelContext, null);
     }
 
@@ -50,14 +50,4 @@ public class AccountsCamelContext {
         camelContext.stop();
     }
 
-    private RouteDefinition buildRoute(String routeId) {
-        RouteDefinition route = new RouteDefinition();
-        route.routeId(routeId);
-        route.from("cxfrs://http://0.0.0.0:8282/fintech?resourceClasses=io.yupiik.camel.sample.fintech.platform.entrypoint.api.AccountsEndpoint&providers=provider.jackson")
-                .log("message received from main entrypoint")
-                .bean(AccountsProcessor.class)
-                .routingSlip()
-                    .header("X-Fintech-Route-Redirect");
-        return route;
-    }
 }

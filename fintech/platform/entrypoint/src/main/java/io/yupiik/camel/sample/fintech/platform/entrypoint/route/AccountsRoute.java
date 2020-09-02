@@ -15,20 +15,18 @@
  */
 package io.yupiik.camel.sample.fintech.platform.entrypoint.route;
 
-import org.apache.camel.Exchange;
-import org.apache.camel.Processor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.camel.builder.RouteBuilder;
 
-public class AccountsProcessor implements Processor {
-
-    private static Logger logger = LoggerFactory.getLogger(AccountsProcessor.class);
+public class AccountsRoute extends RouteBuilder {
 
     @Override
-    public void process(Exchange exchange) {
-        String bank = exchange.getMessage().getHeader("X-Fintech-Bank", String.class);
-        if (bank != null)
-            exchange.getMessage().setHeader("X-Fintech-Route-Redirect", "direct-vm:" + bank);
+    public void configure() {
+        from("cxfrs://http://0.0.0.0:8282/fintech?resourceClasses=io.yupiik.camel.sample.fintech.platform.entrypoint.api.AccountsEndpoint&providers=provider.jackson")
+                .id("account-main-route")
+                .log("message received from main entrypoint")
+                .process(new AccountsProcessor())
+                .log("routing slip on X-Fintech-Route-Redirect header")
+                .routingSlip().header("X-Fintech-Route-Redirect");
     }
 
 }
