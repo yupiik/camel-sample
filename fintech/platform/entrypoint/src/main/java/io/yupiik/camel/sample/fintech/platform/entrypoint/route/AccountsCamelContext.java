@@ -18,7 +18,6 @@ package io.yupiik.camel.sample.fintech.platform.entrypoint.route;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import org.apache.camel.CamelContext;
 import org.apache.camel.core.osgi.OsgiDefaultCamelContext;
-import org.apache.camel.model.RouteDefinition;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.component.ComponentContext;
 import org.osgi.service.component.annotations.Activate;
