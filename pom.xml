@@ -34,7 +34,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <camel.version>3.5.0-SNAPSHOT</camel.version>
+        <camel.version>3.5.0</camel.version>
         <osgi.version>6.0.0</osgi.version>
         <karaf.version>4.2.9</karaf.version>
         <cxf.version>3.3.6</cxf.version>
