@@ -72,7 +72,7 @@
         </dependency>
         <dependency>
           <groupId>org.apache.cxf</groupId>
-          <artifactId>cxf-rt-rs-service-description-openapi-v3</artifactId>
+          <artifactId>cxf-rt-rs-service-description-swagger</artifactId>
           <version>3.3.7</version>
         </dependency>
     </dependencies>

@@ -43,6 +43,7 @@
 
     <feature name="fintech-platform-entrypoint" version="${project.version}" description="Fintech platform entrypoint">
         <feature>fintech-platform-common</feature>
+        <feature>cxf-rs-description-swagger2</feature>
         <bundle>mvn:io.yupiik.camel.sample/fintech-platform-entrypoint/${project.version}</bundle>
     </feature>
 
