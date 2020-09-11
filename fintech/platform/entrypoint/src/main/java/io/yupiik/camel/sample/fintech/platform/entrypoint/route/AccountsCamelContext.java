@@ -18,6 +18,7 @@ package io.yupiik.camel.sample.fintech.platform.entrypoint.route;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import org.apache.camel.CamelContext;
 import org.apache.camel.core.osgi.OsgiDefaultCamelContext;
+import org.apache.cxf.jaxrs.openapi.OpenApiFeature;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.component.ComponentContext;
 import org.osgi.service.component.annotations.Activate;
@@ -39,6 +40,7 @@ public class AccountsCamelContext {
         camelContext.setName("fintech-accounts");
         camelContext.start();
         camelContext.getRegistry().bind("provider.jackson", new JacksonJsonProvider());
+        camelContext.getRegistry().bind("openapi", new OpenApiFeature());
         camelContext.addRoutes(new AccountsRoute());
         serviceRegistration = context.getBundleContext().registerService(CamelContext.class, camelContext, null);
     }

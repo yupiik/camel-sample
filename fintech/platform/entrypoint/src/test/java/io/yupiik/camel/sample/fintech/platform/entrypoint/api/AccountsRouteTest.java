@@ -19,9 +19,8 @@ import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import io.yupiik.camel.sample.fintech.platform.entrypoint.route.AccountsRoute;
 import org.apache.camel.RoutesBuilder;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.directvm.DirectVmConsumerNotAvailableException;
-import org.apache.camel.support.SimpleRegistry;
 import org.apache.camel.test.junit5.CamelTestSupport;
+import org.apache.cxf.jaxrs.openapi.OpenApiFeature;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -93,6 +92,7 @@ public class AccountsRouteTest extends CamelTestSupport {
     @Override
     protected RoutesBuilder[] createRouteBuilders() throws Exception {
         context.getRegistry().bind("provider.jackson", new JacksonJsonProvider());
+        context.getRegistry().bind("openapi", new OpenApiFeature());
         RoutesBuilder[] builder = new RoutesBuilder[2];
         builder[0] = new AccountsRoute();
         builder[1] = new RouteBuilder() {

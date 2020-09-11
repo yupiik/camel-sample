@@ -21,7 +21,7 @@ public class AccountsRoute extends RouteBuilder {
 
     @Override
     public void configure() {
-        from("cxfrs://http://0.0.0.0:8282/fintech?resourceClasses=io.yupiik.camel.sample.fintech.platform.entrypoint.api.AccountsEndpoint&providers=provider.jackson&features=OpenApiFeature")
+        from("cxfrs://http://0.0.0.0:8282/fintech?resourceClasses=io.yupiik.camel.sample.fintech.platform.entrypoint.api.AccountsEndpoint&providers=provider.jackson&features=#openapi&performInvocation=true")
                 .id("account-main-route")
                 .log("message received from main entrypoint")
                 .process(new AccountsProcessor())
