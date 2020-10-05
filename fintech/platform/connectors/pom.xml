@@ -32,6 +32,7 @@
     <modules>
         <module>bankbng</module>
         <module>bankinp</module>
+        <module>idempotent-file</module>
     </modules>
 
 </project>
